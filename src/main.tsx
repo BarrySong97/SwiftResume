@@ -5,6 +5,8 @@ import App from "./App.tsx";
 import "./index.css";
 import Home from "./pages/Home/index.tsx";
 import About from "./pages/About/index.tsx";
+import Login from "./pages/Login/index.tsx";
+import "@douyinfe/semi-ui/dist/css/semi.min.css";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
       {
         path: "about",

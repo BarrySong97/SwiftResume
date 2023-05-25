@@ -1,7 +1,19 @@
 {
   "home": {
-    "title": "首页",
-    "hero": "你好 Home"
+    "title": "简历列表",
+    "hero": "你好 Home",
+    "addButton": "添加简历"
+  },
+  "addModal": {
+    "title": "添加简历"
+  },
+  "login": {
+    "slogan": "抓住属于自己的机遇",
+    "box": {
+      "login": "登录",
+      "slogan": "书写更好的简历",
+      "button": "Google 登录"
+    }
   },
   "about": {
     "title": "关于",

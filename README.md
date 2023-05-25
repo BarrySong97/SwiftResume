@@ -22,9 +22,9 @@ yarn
 
 start project
 ```bash
-pnpm start
+pnpm dev
 
-npm start
+npm dev
 
-yarn start
+yarn dev
 ```

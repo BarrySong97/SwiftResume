@@ -1,7 +1,19 @@
 {
   "home": {
     "title": "Home",
-    "hero": "Hello Home"
+    "hero": "Hello Home",
+    "addButton": "New Resume"
+  },
+  "addModal": {
+    "title": "New Resume"
+  },
+  "login": {
+    "slogan": "day by day, to a higher level",
+    "box": {
+      "login": "Login",
+      "slogan": "built best of you",
+      "button": "Login with Google"
+    }
   },
   "about": {
     "title": "About",
