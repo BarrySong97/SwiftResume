@@ -4,6 +4,9 @@
     "hero": "你好 Home",
     "addButton": "添加简历"
   },
+  "new": {
+    "addResource": "添加资源"
+  },
   "addModal": {
     "title": "添加简历"
   },

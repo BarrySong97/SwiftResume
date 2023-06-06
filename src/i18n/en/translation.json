@@ -4,6 +4,9 @@
     "hero": "Hello Home",
     "addButton": "New Resume"
   },
+  "new": {
+    "addResource": "Add Resource"
+  },
   "addModal": {
     "title": "New Resume"
   },
