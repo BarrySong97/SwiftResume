@@ -7,8 +7,9 @@ import Home from "./pages/Home/index.tsx";
 import About from "./pages/About/index.tsx";
 import Login from "./pages/Login/index.tsx";
 import "@douyinfe/semi-ui/dist/css/semi.min.css";
-import NewResume from "./pages/New/index.tsx";
+import NewHTMLResume from "./pages/New/index.tsx";
 import "./useWorker";
+import NewMarkdown from "./pages/newMarkdown/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "new",
-    element: <NewResume />,
+    path: "newhtml",
+    element: <NewHTMLResume />,
+  },
+  {
+    path: "newmarkdown",
+    element: <NewMarkdown />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

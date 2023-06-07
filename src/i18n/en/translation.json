@@ -5,7 +5,13 @@
     "addButton": "New Resume"
   },
   "new": {
-    "addResource": "Add Resource"
+    "addResource": "Add Resource",
+    "printPdf": "Download PDF",
+    "addHead": "Add HTML Head",
+    "downloadTitle": "Download resume PDF",
+    "downloadFormFiledName": "File Name",
+    "downloadSection1": "Basic",
+    "downloadSection2": "PDF Margin"
   },
   "addModal": {
     "title": "New Resume"

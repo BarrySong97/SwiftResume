@@ -5,7 +5,13 @@
     "addButton": "添加简历"
   },
   "new": {
-    "addResource": "添加资源"
+    "addResource": "添加资源",
+    "printPdf": "下载 PDF",
+    "addHead": "添加 HTML head",
+    "downloadTitle": "下载简历 PDF",
+    "downloadFormFiledName": "文件名",
+    "downloadSection1": "简历基本信息",
+    "downloadSection2": "PDF 边距设置"
   },
   "addModal": {
     "title": "添加简历"
