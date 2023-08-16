@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
+import { Helmet } from "react-helmet";
 import theme from "./themes/twilight.json";
 import axios from "axios";
 import { editor } from "monaco-editor";
@@ -11,19 +12,28 @@ import { VscodeIconsFileTypeHtml } from "../../assets/icons/HTML";
 import { VscodeIconsFileTypeCss } from "../../assets/icons/CSS";
 import { VscodeIconsFileTypeLightJson } from "../../assets/icons/Json copy";
 import { Notification } from "@douyinfe/semi-ui";
-import { useBoolean, useDebounceEffect, useSize } from "ahooks";
+import {
+  useBoolean,
+  useDebounceEffect,
+  useDebounceFn,
+  useRequest,
+  useSize,
+} from "ahooks";
 import { useTranslation } from "react-i18next";
 import { MaterialSymbolsSettingsSuggestOutline } from "../../assets/icons/AddResource";
 import AddResouceModal from "./components/addResouceModal";
 import { Tooltip } from "@douyinfe/semi-ui";
 import { IcRoundPictureAsPdf } from "../../assets/icons/PDF";
 import DownloadPdfModal, { PdfMargin } from "./components/DownloadPdfModal";
+import { json, useParams } from "react-router-dom";
+import { ResumeService } from "../../api";
 const jsonInit = {
   name: "Barry Song",
 };
 const htmlInit = '<div class="color">{{name}}</div>';
 const cssInit = ".color{color:red}";
 const NewHTMLResume: FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [htmlCode, setHtmlCode] = useState(htmlInit);
   const [cssCode, setCssCode] = useState(cssInit);
   const [jsonCode, setJsonCode] = useState(JSON.stringify(jsonInit, null, 2));
@@ -39,14 +49,18 @@ const NewHTMLResume: FC = () => {
     { setTrue: setDownloadPdfModalShow, setFalse: setDownloadPdfModalHide },
   ] = useBoolean(false);
   const renderTemplate = (html: string, data: Record<string, any>) => {
-    const template = Handlebars.compile(html);
-    return template(data);
+    try {
+      const template = Handlebars.compile(html);
+      return template(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const compositionCode = (html: string, json: string, css: string) => {
     if (!json) return;
     // if (!html) return;
     const data = JSON.parse(json);
-    const renderedHtml = renderTemplate(html, data);
+    const renderedHtml = renderTemplate(html, { resume: data });
 
     const iframeContent = `
         <html>
@@ -62,6 +76,12 @@ const NewHTMLResume: FC = () => {
   useDebounceEffect(
     () => {
       try {
+        ResumeService.resumeControllerUpdate(id!, {
+          html: htmlCode,
+          css: cssCode,
+          json: jsonCode,
+          head: headCode,
+        });
         const result = compositionCode(htmlCode, jsonCode, cssCode);
         setPreview(result ?? "");
       } catch (error) {
@@ -72,11 +92,20 @@ const NewHTMLResume: FC = () => {
         });
       }
     },
-    [jsonCode, htmlCode, cssCode, headCode],
+    [htmlCode, jsonCode, cssCode, headCode],
     {
       wait: 1000,
     }
   );
+  useRequest(() => ResumeService.resumeControllerFindOne(id!), {
+    onSuccess(data) {
+      const { css, head, html, json } = data;
+      setCssCode(css ?? cssInit);
+      setHtmlCode(html ?? htmlInit);
+      setJsonCode(json);
+      setHeadCode(head ?? "");
+    },
+  });
 
   const handleHtmlCodeChange = (content: string) => {
     setHtmlCode(content);
@@ -120,6 +149,11 @@ const NewHTMLResume: FC = () => {
   const { t } = useTranslation();
   return (
     <div className="h-screen flex">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>New HTML resume - Swift Resume</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div className="w-1/2 relative">
         <Tabs>
           <TabList>
@@ -199,7 +233,9 @@ const NewHTMLResume: FC = () => {
             <MonacoEditor
               value={jsonCode}
               key={size?.width}
-              onChange={(e) => setJsonCode(e)}
+              onChange={(e) => {
+                setJsonCode(e);
+              }}
               language="json"
               theme="twilight"
               options={options}

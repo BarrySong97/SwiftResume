@@ -38,7 +38,7 @@ function App() {
             <Nav mode="horizontal" defaultSelectedKeys={["Home"]}>
               <Nav.Item
                 itemKey="Home"
-                text={<Link to="/">{t("home.title")}</Link>}
+                text={<Link to="/workspace">{t("home.title")}</Link>}
                 // icon={<IconHome size="large" />}
               />
               <Nav.Item

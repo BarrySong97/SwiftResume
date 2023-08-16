@@ -1,5 +1,6 @@
 import { Button, Typography } from "@douyinfe/semi-ui";
 import { FC } from "react";
+import { Helmet } from "react-helmet";
 import styles from "./index.module.less";
 import { Link } from "react-router-dom";
 import { LogosGoogleIcon } from "../../assets/icons/Google";
@@ -12,6 +13,11 @@ const Login: FC<LoginProps> = () => {
   const { t } = useTranslation();
   return (
     <div className="h-screen flex relative">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Login - Swift Resume</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div className="absolute left-6 top-4 ">
         <Link to={"/"}>
           <Title heading={2} type="secondary" strong>
@@ -23,16 +29,7 @@ const Login: FC<LoginProps> = () => {
         </Link>
       </div>
       <div className="w-1/3">
-        <img
-          src={"/login-cover.jpg"}
-          alt="Picture of the author"
-          className="object-cover"
-          style={{ height: "100%" }}
-          // width={500} automatically provided
-          // height={500} automatically provided
-          // blurDataURL="data:..." automatically provided
-          // placeholder="blur" // Optional blur-up while loading
-        />
+        <img className="h-full" src={"/login-cover.jpg"} />
       </div>
       <div className="w-2/3  flex flex-col justify-center items-center">
         <div

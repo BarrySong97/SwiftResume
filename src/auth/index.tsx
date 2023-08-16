@@ -1,6 +1,5 @@
 import { Notification, Spin, Typography } from "@douyinfe/semi-ui";
 import { useBoolean } from "ahooks";
-import axios from "axios";
 import React, { useCallback, useEffect } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthService, UserDTO } from "../api";

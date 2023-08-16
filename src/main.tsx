@@ -7,36 +7,50 @@ import Home from "./pages/Home/index.tsx";
 import About from "./pages/About/index.tsx";
 import Login from "./pages/Login/index.tsx";
 import "@douyinfe/semi-ui/dist/css/semi.min.css";
-import NewHTMLResume from "./pages/New/index.tsx";
 import "./useWorker";
-import NewMarkdown from "./pages/newMarkdown/index.tsx";
+import { AuthProvider, RequireAuth } from "./auth/index.tsx";
+import NewHTMLResume from "./pages/Resume/index.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    ),
     // loader: rootLoader,
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "login",
-        element: <Login />,
+        path: "workspace",
+        element: (
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        ),
       },
       {
         path: "about",
-        element: <About />,
+        element: (
+          <RequireAuth>
+            <About />
+          </RequireAuth>
+        ),
       },
     ],
   },
   {
-    path: "newhtml",
-    element: <NewHTMLResume />,
+    path: "login",
+    element: <Login />,
   },
   {
-    path: "newmarkdown",
-    element: <NewMarkdown />,
+    path: "resume/:id",
+    element: (
+      <AuthProvider>
+        <RequireAuth>
+          <NewHTMLResume />
+        </RequireAuth>
+      </AuthProvider>
+    ),
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
