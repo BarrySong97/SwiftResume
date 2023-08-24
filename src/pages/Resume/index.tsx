@@ -102,6 +102,7 @@ const NewHTMLResume: FC = () => {
       const { css, head, html, json } = data;
       setCssCode(css ?? cssInit);
       setHtmlCode(html ?? htmlInit);
+
       setJsonCode(json);
       setHeadCode(head ?? "");
     },
@@ -260,6 +261,7 @@ const NewHTMLResume: FC = () => {
       </div>
       <AddResouceModal
         visible={addResourceModalShow}
+        value={headCode}
         onOk={setAddResourceModalHide}
         onCancel={setAddResourceModalHide}
         onChange={(e) => setHeadCode(e)}

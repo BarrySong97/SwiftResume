@@ -8,7 +8,6 @@ export function getCodeFromUrl(url: string): string | null {
   return code;
 }
 export function createGoogleLoginUrl() {
-    console.log(import.meta.env.GOOGLE_CALLBACK_URL);
   const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
   const scope = "email profile"; // 请求 email 和 profile 信息
   const responseType = "code"; // 我们希望得到一个授权码

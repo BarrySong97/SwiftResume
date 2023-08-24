@@ -1,15 +1,23 @@
 import { TextArea } from "@douyinfe/semi-ui";
 import Modal, { ModalReactProps } from "@douyinfe/semi-ui/lib/es/modal";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 export type ResouceType = {
   type: "js" | "css" | "font";
   url: string[];
 };
 export interface AddResouceModalProps extends ModalReactProps {
   onChange: (code: string) => void;
+  value: string;
 }
-const AddResouceModal: FC<AddResouceModalProps> = ({ onChange, ...props }) => {
-  const [headContent, setContent] = useState("");
+const AddResouceModal: FC<AddResouceModalProps> = ({
+  value,
+  onChange,
+  ...props
+}) => {
+  const [headContent, setContent] = useState<string>();
+  useEffect(() => {
+    setContent(value);
+  }, [value]);
   return (
     <Modal
       {...props}
